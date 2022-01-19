@@ -1,0 +1,228 @@
+// Array of all servers that don't need any ports opened
+// to gain root access. These have 16 GB of RAM
+var servers0Port = ["sigma-cosmetics",
+                    "joesguns",
+                    "foodnstuff",
+                    "nectar-net",
+                    "hong-fang-tea",
+                    "harakiri-sushi"];
+
+// Array of all servers that only need 1 port opened
+// to gain root access. These have 32 GB of RAM
+var servers1Port = ["neo-net",
+                    "zer0",
+                    "max-hardware",
+                    "iron-gym"];
+
+
+var pservers = ["pserv-0",
+                "pserv-1",
+                "pserv-2",
+                "pserv-3",
+                "pserv-4",
+                "pserv-5",
+                "pserv-6",
+                "pserv-7",
+                "pserv-8",
+                "pserv-9",
+                "pserv-10",
+                "pserv-11",
+                "pserv-12",
+                "pserv-13",
+                "pserv-14",
+                "pserv-15",
+                "pserv-16",
+                "pserv-17",
+                "pserv-18",
+                "pserv-19",
+                "pserv-20",
+                "pserv-21",
+                "pserv-22",
+                "pserv-23",
+                "pserv-24",];
+
+var servers2Port = ["phantasy",
+                    "omega-net",
+                    "silver-helix",
+                    "the-hub"];
+                    
+var servers3Port = ["netlink",
+                    "catalyst",
+                    "rothman-uni",
+                    "I.I.I.I",
+                    "summit-uni",
+                    "rho-construction"];
+
+var servers4Port = ["lexo-corp",
+                    "univ-energy",
+                    "alpha-ent",
+                    "unitalife",
+                    "aevum-police"];
+
+var servers5Port = ["solaris",
+                    "omnia",
+                    "zb-institute"];
+
+//I made this one for my personal servers to change the target of 
+// early_hack_script 
+for (var i = 0; i < pservers.length; ++i) {
+    var serv = pservers[i];
+   
+    kill("early_hack_script.script",serv);
+    scp("early_hack_script.script", serv);
+    exec("early_hack_script.script", serv, 3);
+}
+// Copy our scripts onto each server that requires 0 ports
+// to gain root access. Then use nuke() to gain admin access and
+// run the scripts.
+for (var i = 0; i < servers0Port.length; ++i) {
+    var serv = servers0Port[i];
+    
+    var max_ram = getServerMaxRam(serv);
+    var ram_needed = getScriptRam("early_hack_script.script");
+    var num_threads = -3;
+
+    for (var a = 0; a * ram_needed < max_ram; a += 3) {
+	    num_threads += 3
+    }
+
+    kill("early_hack_script.script",serv);
+    scp("early_hack_script.script", serv);
+    nuke(serv);
+    exec("early_hack_script.script", serv, num_threads);
+
+    
+}
+// Wait until we acquire the "BruteSSH.exe" program
+while (!fileExists("BruteSSH.exe")) {
+    sleep(60000);
+}
+// Copy our scripts onto each server that requires 1 port
+// to gain root access. Then use brutessh() and nuke()
+// to gain admin access and run the scripts.
+for (var i = 0; i < servers1Port.length; ++i) {
+    var serv = servers1Port[i];
+    
+    var max_ram = getServerMaxRam(serv);
+    var ram_needed = getScriptRam("early_hack_script.script");
+    var num_threads = -3;
+
+    for (var a = 0; a * ram_needed < max_ram; a += 3) {
+	    num_threads += 3
+    }
+
+    kill("early_hack_script.script",serv);
+    scp("early_hack_script.script", serv);
+    brutessh(serv);
+    nuke(serv);
+    exec("early_hack_script.script", serv, num_threads);
+
+}
+while (!fileExists("FTPcrack.exe")) {
+    sleep(60000);
+}
+for (var i = 0; i < servers2Port.length; ++i) {
+    var serv = servers2Port[i];
+    
+    var max_ram = getServerMaxRam(serv);
+    var ram_needed = getScriptRam("early_hack_script.script");
+    var num_threads = -3;
+
+    for (var a = 0; a * ram_needed < max_ram; a += 3) {
+	    num_threads += 3
+    }
+
+    kill("early_hack_script.script",serv);
+    scp("early_hack_script.script", serv);
+    brutessh(serv);
+    ftpcrack(serv);
+    nuke(serv);
+    exec("early_hack_script.script", serv, num_threads);
+
+    
+}
+
+while (!fileExists("FTPcrack.exe")){
+    sleep(60000);
+}
+for (var i = 0; i < servers3Port.length; ++i) {
+    var serv = servers3Port[i];
+    
+    var max_ram = getServerMaxRam(serv);
+    var ram_needed = getScriptRam("early_hack_script.script");
+    var num_threads = -3;
+
+    for (var a = 0; a * ram_needed < max_ram; a += 3) {
+	    num_threads += 3
+    }
+
+    kill("early_hack_script.script",serv);
+    scp("early_hack_script.script", serv);
+    brutessh(serv);
+    ftpcrack(serv);
+    relaysmtp(serv);
+    nuke(serv);
+    exec("early_hack_script.script", serv, num_threads);
+
+    
+}
+
+for (var i = 0; i < servers4Port.length; ++i) {
+    var serv = servers4Port[i];
+    
+    var max_ram = getServerMaxRam(serv);
+    var ram_needed = getScriptRam("early_hack_script.script");
+    var num_threads = -3;
+
+    for (var a = 0; a * ram_needed < max_ram; a += 3) {
+	    num_threads += 3
+    }
+
+    kill("early_hack_script.script",serv);
+    scp("early_hack_script.script", serv);
+    brutessh(serv);
+    ftpcrack(serv);
+    relaysmtp(serv);
+    httpworm(serv);
+    nuke(serv);
+    exec("early_hack_script.script", serv, num_threads);
+
+    
+}
+for (var i = 0; i < servers5Port.length; ++i) {
+    var serv = servers5Port[i];
+    
+    var max_ram = getServerMaxRam(serv);
+    var ram_needed = getScriptRam("early_hack_script.script");
+    var num_threads = -3;
+
+    for (var a = 0; a * ram_needed < max_ram; a += 3) {
+	    num_threads += 3
+    }
+
+    kill("early_hack_script.script",serv);
+    scp("early_hack_script.script", serv);
+    brutessh(serv);
+    ftpcrack(serv);
+    relaysmtp(serv);
+    httpworm(serv);
+    sqlinject(serv);
+    nuke(serv);
+    exec("early_hack_script.script", serv, num_threads);
+
+}
+
+var serv = "home";
+    
+var max_ram = getServerMaxRam(serv);
+var ram_needed = getScriptRam("early_hack_script.script");
+var num_threads = -3;
+
+for (var a = 0; a * ram_needed < max_ram; a += 3) {
+    num_threads += 3
+}
+var homethredds = num_threads-20;
+kill("early_hack_script.script",serv);
+scp("early_hack_script.script", serv);
+nuke(serv);
+exec("early_hack_script.script", serv, homethredds);
